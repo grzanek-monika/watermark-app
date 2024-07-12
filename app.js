@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const startApp = async () => {
 
-  const addTextWatermarkToImage = async function(inputFile, outputFile, text) {
+  const addTextWatermarkToImage = async (inputFile, outputFile, text) => {
     const image = await Jimp.read(inputFile);
     const font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
   
@@ -19,7 +19,7 @@ const startApp = async () => {
     await image.quality(100).writeAsync(outputFile);
   };
   
-  const addImageWatermarkToImage = async function(inputFile, outputFile, watermarkFile) {
+  const addImageWatermarkToImage = async (inputFile, outputFile, watermarkFile) => {
     const image = await Jimp.read(inputFile);
     const watermark = await Jimp.read(watermarkFile);
   
@@ -34,29 +34,28 @@ const startApp = async () => {
   }
 
   const prepareOutputFilename = (inputFilename) => {
-    const outputFilename = inputFilename.split(".").join('-with-watermark.');
-    return outputFilename;
+    return inputFilename.split(".").join('-with-watermark.');
   }
 
-  const makeImageBrighter = async function(inputFile) {
+  const makeImageBrighter = async (inputFile) => {
     const image = await Jimp.read(inputFile);
     image.brightness(0.2);
     await image.quality(100).writeAsync(inputFile);
   };
 
-  const increaseContrast = async function(inputFile) {
+  const increaseContrast = async (inputFile) => {
     const image = await Jimp.read(inputFile);
     image.contrast(0.3);
     await image.quality(100).writeAsync(inputFile);
   };
 
-  const makeImageBlackAndWhite = async function(inputFile) {
+  const makeImageBlackAndWhite = async (inputFile) => {
     const image = await Jimp.read(inputFile);
     image.greyscale();
     await image.quality(100).writeAsync(inputFile);
   };
 
-  const invertImage = async function(inputFile) {
+  const invertImage = async (inputFile) => {
     const image = await Jimp.read(inputFile);
     image.flip(true, false); 
     await image.quality(100).writeAsync(inputFile);
@@ -118,7 +117,7 @@ const startApp = async () => {
       } else {
         break;
       }
-    }
+    } 
 
     const options = await inquirer.prompt([{
       name: 'watermarkType',
